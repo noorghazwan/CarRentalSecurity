@@ -45,5 +45,45 @@ public class Main {
 
         System.out.println("Welcome " + currentUser.getUsername());
         System.out.println("Role: " + currentUser.getRole());
+
+        // Start session management and access control
+        if (currentUser != null) {
+            AccessControl.startSession(currentUser);
+
+            boolean running = true;
+            while (running) {
+                System.out.println("\n=== Car Rental Menu ===");
+                System.out.println("1. Calculate Rental Cost");
+                System.out.println("2. Update Car data");
+                System.out.println("3. Logout");
+                System.out.print("Select an option: ");
+
+                String choice = input.nextLine();
+
+                switch (choice) {
+                    case "1":
+                        if (AccessControl.isAuthorized("USER_TASK")) {
+                            System.out.println("Processing rental cost calculation...");
+                        }
+                        break;
+                    case "2":
+                        if (AccessControl.isAuthorized("ADMIN_TASK")) {
+                            System.out.println("Processing car data update...");
+                        }
+                        break;
+                    case "3":
+                        AccessControl.logout();
+                        running = false;
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please try again.");
+                }
+
+                // Check session validity after each action
+                if (!AccessControl.isSessionActive()) {
+                    running = false;
+                }
+            }
+        }
     }
 }
