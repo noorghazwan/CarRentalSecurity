@@ -60,10 +60,35 @@ public class Main {
 
                 String choice = input.nextLine();
 
+                if (!choice.matches("[1-3]")) {
+                    System.out.println("Invalid option. Please select 1, 2, or 3.");
+                    continue;
+                }
+
                 switch (choice) {
                     case "1":
                         if (AccessControl.isAuthorized("USER_TASK")) {
-                            System.out.println("Processing rental cost calculation...");
+                           // System.out.println("Processing rental cost calculation...");
+                            int passengers = -1;
+                            int days = -1;
+                            double mileage = -1;
+
+                            while (passengers == -1) {
+                                System.out.print("Enter number of passengers: ");
+                                passengers = Validator.validatePassengers(input.nextLine());
+                            }
+
+                            while (days == -1) {
+                                System.out.print("Enter rental days: ");
+                                days = Validator.validateDays(input.nextLine());
+                            }
+
+                            while (mileage == -1) {
+                                System.out.print("Enter estimated mileage: ");
+                                mileage = Validator.validateMileage(input.nextLine());
+                            }
+
+                            System.out.println("Inputs accepted successfully!");
                         }
                         break;
                     case "2":
