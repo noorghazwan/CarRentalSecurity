@@ -4,8 +4,24 @@
  */
 
 /**
+ * This class handles user authentication for the Car Rental Finder application.
+ * Maintains the in-memory user database and verifies login credentials.
  *
- * @author Noor Safia
+ * Security Design Principles Applied:
+ * 1. Defense in Depth:
+ *    Passwords are never compared in plain text. The input password
+ *    is hashed using SHA-256 via HashUtil before being compared
+ *    against the stored hash, adding a layer of protection even
+ *    if the user list is exposed.
+ *
+ * 2. Compartmentalization:
+ *    Authentication logic is fully separated from the rest of the
+ *    application. Main.java has no knowledge of how authentication
+ *    works internally. it only receives a User object or null.
+ *
+ * 3. Fail-Safe Defaults:
+ *    If credentials do not match, the method returns null.
+ *    Access is denied by default unless an exact match is found.
  */
 import java.util.ArrayList;
 

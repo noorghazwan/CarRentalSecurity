@@ -1,3 +1,13 @@
+/**
+ * This is an abstract base class representing a rental car.
+ * Defines the common attributes and cost calculation methods
+ * shared across all car types (Economy, Intermediate, Standard, Van).
+ *
+ * All rental cost, gas cost, and total cost calculations
+ * are handled here using the formula:
+ * Total Cost = (Days x Daily Rate) + (Mileage / MPG x $2.25)
+ */
+
 public abstract class Car {
 
     protected String make;

@@ -1,3 +1,21 @@
+/**
+ * This class is a centralized input validation for the Car Rental Finder application.
+ * All user inputs must pass through this class before any processing
+ * or calculation is performed.
+ *
+ * Security Design Principles Applied:
+ * 1. Minimize Trust Surface:
+ *    No user input is trusted by default. Every value is parsed,
+ *    checked for type correctness, and validated against acceptable
+ *    ranges before being passed to any business logic.
+ *    Invalid inputs are rejected immediately with a clear message.
+ *
+ * 2. Defense in Depth:
+ *    Validation acts as the first security layer. Even if invalid
+ *    data somehow bypasses the UI, this class ensures it is caught
+ *    before reaching the RecommendationEngine or any calculation.
+ */
+
 public class Validator {
 
     // Validate passengers

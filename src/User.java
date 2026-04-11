@@ -4,9 +4,12 @@
  */
 
 /**
- *
- * @author Noor Safia
+ * This class represents a user account in the Car Rental Finder application.
+ * Stores the username, hashed password, and role (Admin or User).
+ * Passwords are hashed immediately upon object creation via HashUtil
+ * and are never stored or accessible in plain text.
  */
+
 public class User {
       private String username;
     private String passwordHash;

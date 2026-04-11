@@ -4,9 +4,25 @@
  */
 
 /**
+ * This class is the entry point of the Car Rental Finder application.
+ * Manages the login flow, menu navigation, and session lifecycle.
  *
- * @author Noor Safia
+ * Security Design Principles Applied:
+ * 1. Fail-Safe Defaults:
+ *    Login attempts are limited to 3 tries. If the user exceeds
+ *    this limit, access is denied and the program terminates.
+ *
+ * 2. Least Privilege:
+ *    Menu options are restricted based on the logged-in user's role.
+ *    Option 2 (Update Car Data) is only accessible to Admin users.
+ *    Regular users are blocked from performing administrative actions.
+ *
+ * 3. Complete Mediation:
+ *    Session validity is checked after every menu action. If the
+ *    session has expired, the program exits immediately without
+ *    allowing further operations.
  */
+
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
@@ -66,9 +82,8 @@ public class Main {
                 }
 
                 switch (choice) {
-                    case "1":
+                    case "1" -> {
                         if (AccessControl.isAuthorized("USER_TASK")) {
-                           // System.out.println("Processing rental cost calculation...");
                             int passengers = -1;
                             int days = -1;
                             double mileage = -1;
@@ -77,7 +92,7 @@ public class Main {
                                 System.out.print("Enter number of passengers: ");
                                 passengers = Validator.validatePassengers(input.nextLine());
                             }
-
+                            
                             while (days == -1) {
                                 System.out.print("Enter rental days: ");
                                 days = Validator.validateDays(input.nextLine());
@@ -87,21 +102,22 @@ public class Main {
                                 System.out.print("Enter estimated mileage: ");
                                 mileage = Validator.validateMileage(input.nextLine());
                             }
-
-                            System.out.println("Inputs accepted successfully!");
+                            
+                            // Call recommendation engine
+                            RecommendationEngine.recommend(passengers, days, mileage);
                         }
-                        break;
-                    case "2":
+                    }
+
+                    case "2" -> {
                         if (AccessControl.isAuthorized("ADMIN_TASK")) {
                             System.out.println("Processing car data update...");
                         }
-                        break;
-                    case "3":
+                    }
+                    case "3" -> {
                         AccessControl.logout();
                         running = false;
-                        break;
-                    default:
-                        System.out.println("Invalid option. Please try again.");
+                    }
+                    default -> System.out.println("Invalid option. Please try again.");
                 }
 
                 // Check session validity after each action

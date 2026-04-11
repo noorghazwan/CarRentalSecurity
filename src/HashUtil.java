@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+import java.security.MessageDigest;
 
 /**
- *
- * @author Noor Safia
+ * This utility class for password hashing.
+ * Converts plain text passwords into SHA-256 hashed strings
+ * to ensure passwords are never stored or compared in plain text.
  */
 
-import java.security.MessageDigest;
 public class HashUtil {
         public static String hashPassword(String password) {
         try {
